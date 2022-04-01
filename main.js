@@ -1,5 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
+const { autoUpdater } = require("electron-updater")
+require('update-electron-app')()
 const path = require('path')
 
 function createWindow () {
@@ -23,7 +25,9 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  alert(1234)
   createWindow()
+  // checkUpdate()
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
@@ -31,6 +35,33 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 })
+
+function checkUpdate(){
+  //autoUpdater.logger = require("electron-log")
+  //autoUpdater.logger.transports.file.level = "info"
+  autoUpdater.autoInstallOnAppQuit = false
+  autoUpdater.checkForUpdates()
+  autoUpdater.on('error', (err) => {
+    console.log(err)
+  })
+  autoUpdater.on('update-available', () => {
+    console.log('发现新版本')
+  })
+  autoUpdater.on('update-downloaded', () => {
+    dialog.showMessageBox({
+      type: 'info',
+      title: '应用更新',
+      message: '发现新版本，是否更新？',
+      buttons: ['是', '否']
+    }).then((buttonIndex) => {
+      if(buttonIndex.response == 0) { 
+        autoUpdater.quitAndInstall() 
+        app.quit()
+      }
+    })
+  })
+  console.log('检查更新完毕')
+}
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
