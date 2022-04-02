@@ -169,7 +169,7 @@ function checkUpdate(){
     }).then((buttonIndex) => {
       if(buttonIndex.response == 0) { 
         autoUpdater.quitAndInstall() 
-        app.quit()
+        // app.quit()
       }
     })
   })
