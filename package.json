@@ -1,6 +1,6 @@
 {
   "name": "electron-quick-start",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
@@ -30,6 +30,7 @@
     "electron-builder": "^22.14.13"
   },
   "dependencies": {
+    "electron-log": "^4.4.6",
     "electron-updater": "^4.6.5",
     "update-electron-app": "^2.0.1"
   }
