@@ -2,6 +2,7 @@
 // See LICENSE for details
 
 const {app, BrowserWindow, Menu} = require('electron');
+const { dialog } = require('electron')
 const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");
 
